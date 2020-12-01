@@ -3,8 +3,8 @@ $nama = preg_replace("/[^a-zA-Z0-9 ]+/", "", urldecode($_GET['nama']));
 if (empty($nama)) {
     $nama = "iBNuX";
 }
-if(strlen($nama)>24)
-    $nama = substr($nama,0,24);
+if (strlen($nama) > 24)
+    $nama = substr($nama, 0, 24);
 $md5 = md5(strtoupper($nama));
 $path = "images/$md5.jpg";
 ?>
@@ -45,7 +45,7 @@ $path = "images/$md5.jpg";
                 <form>
                     <div class="form-row">
                         <div class="col">
-                        <label>Nama Anda?</label><br>
+                            <label>Nama Anda?</label><br>
                             <input type="text" name="nama" value="<?= $nama ?>" class="form-control" placeholder="Nama">
                         </div>
                         <div class="col-3">
@@ -55,14 +55,17 @@ $path = "images/$md5.jpg";
                     </div>
                 </form>
                 <input type="text" class="form-control mt-4" readonly onclick="this.select()" value="https://titofinance.ibnux.com/?nama=<?= urlencode($nama) ?>">
-                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?url=<?= urlencode("https://titofinance.ibnux.com/?nama=" . $nama) ?>&text=<?=urlencode("saya terdaftar sebagai Nasabah Tito Finance")?>">Tweet</a>
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?url=<?= urlencode("https://titofinance.ibnux.com/?nama=" . $nama) ?>&text=<?= urlencode("saya terdaftar sebagai Nasabah Tito Finance") ?>">Tweet</a>
                 <div class="fb-share-button" data-href="https://titofinance.ibnux.com/?nama=<?= urlencode($nama) ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode("https://titofinance.ibnux.com/?nama=" . $nama) ?>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
                 <br>
                 <div class=" mt-4">klik kartu untuk diunduh
-                <a href="img.php?nama=<?= urlencode($nama) ?>&dl"><img src="img.php?nama=<?= urlencode($nama) ?>" class="img-fluid rounded"></a>
+                    <a href="img.php?nama=<?= urlencode($nama) ?>&dl"><img src="img.php?nama=<?= urlencode($nama) ?>" class="img-fluid rounded"></a>
                 </div><br><br>
                 Terdaftar<br>
                 <img src="ojk.png" alt="ojk" class="img-fluid">
+                <hr>
+                <!-- Place this tag where you want the button to render. -->
+                <a class="github-button" href="https://github.com/ibnux/TitoFinanceCard" data-icon="octicon-star" data-size="large" aria-label="Star ibnux/TitoFinanceCard on GitHub">Star</a>
             </div>
         </div>
     </div>
@@ -85,6 +88,8 @@ $path = "images/$md5.jpg";
         }(document, "script", "twitter-wjs"));
     </script>
     <script type='text/javascript' src='//b73uszzq3g9h.com/a2/9e/e5/a29ee57969d0a0b8544467d412f53770.js'></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>
