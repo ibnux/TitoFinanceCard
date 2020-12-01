@@ -1,2 +1,3 @@
 images/**
 !images/index.php
+vendor/

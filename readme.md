@@ -1,8 +1,8 @@
-![tolol](https://tolol.ibnux.com/images/ac81acf930a25ea8e142cbca467ee0b9.jpg)
+![tolol](https://titofinance.ibnux.com/images/ac81acf930a25ea8e142cbca467ee0b9.jpg)
 
-# PHP Sertifikat generator untuk orang tolol
+# PHP Credit Card Generator
 
-Aplikasi php untuk membuat sertifikat
+Aplikasi php untuk membuat Kartu Kredit Tito Finance
 
 
 

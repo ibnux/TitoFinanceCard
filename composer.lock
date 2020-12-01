@@ -1,0 +1,69 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1e4eade1b7e73c69386a555c0220fac1",
+    "packages": [
+        {
+            "name": "rplansky/credit-card",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rplansky/credit-card-php.git",
+                "reference": "73e8a9f5d214a958993b2cdc9ecb7c3ea7cd691e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rplansky/credit-card-php/zipball/73e8a9f5d214a958993b2cdc9ecb7c3ea7cd691e",
+                "reference": "73e8a9f5d214a958993b2cdc9ecb7c3ea7cd691e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "bin": [
+                "bin/ccgenerator",
+                "bin/ccvalidator"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Plansky\\CreditCard": "src/"
+                },
+                "classmap": [
+                    "test/Plansky/CreditCard/TestCase.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ricardo Plansky",
+                    "homepage": "http://www.rplansky.com"
+                }
+            ],
+            "description": "Simple package to generate and validate credit card numbers in PHP",
+            "keywords": [
+                "credit-card",
+                "helper",
+                "validator"
+            ],
+            "time": "2015-04-12T21:01:56+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "rplansky/credit-card": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
