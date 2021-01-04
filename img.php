@@ -2,15 +2,40 @@
 include "vendor/autoload.php";
 
 $text = strtoupper(preg_replace("/[^a-zA-Z0-9 ]+/", "",urldecode($_GET['nama'])));
+$kartu = strtoupper(preg_replace("/[^a-zA-Z0-9 ]+/", "",urldecode($_GET['kartu'])));
+$tipe = strtoupper(preg_replace("/[^a-zA-Z0-9 ]+/", "",urldecode($_GET['tipe'])))*1;
 if(strlen($text)>24)
     $text = substr($text,0,24);
-$md5 = md5($text);
+
+$md5 = md5(strtoupper($text.$kartu.$tipe));
 $path = "images/$md5.jpg";
+$save = true;
+
+if(empty($kartu)){
+    $generator = new Plansky\CreditCard\Generator();
+    $nomor = $generator->single(5409, 20);
+    $kartu = substr($nomor,0,4).' '.substr($nomor,4,4).' '.substr($nomor,8,4).' '.substr($nomor,12,4);
+}
+// }else{
+//     $save = false;
+// }
+
 
 if (isset($_GET['dl'])) {
+    if($tipe==5){
+        $namaTipe = 'uranium';
+    }else if($tipe==4){
+        $namaTipe = 'plutonium';
+    }else if($tipe==3){
+        $namaTipe = 'platinum';
+    }else if($tipe==2){
+        $namaTipe = 'neo_diamond';
+    }else{
+        $namaTipe = 'red_diamond';
+    }
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename=sertifikate_tolol_untuk_'.strtolower(preg_replace("/[^a-zA-Z0-9]+/", "_", $text)). ".jpg");
+    header('Content-Disposition: attachment; filename=tito_finance_'.$namaTipe.'_untuk_'.strtolower(preg_replace("/[^a-zA-Z0-9]+/", "_", $text." ".$kartu)). ".jpg");
     header('Content-Transfer-Encoding: binary');
     header('Connection: Keep-Alive');
     header('Expires: 0');
@@ -23,15 +48,29 @@ if (isset($_GET['dl'])) {
     header('Content-Type: image/jpeg');
 }
 
-if (!file_exists($path)) {
+if (!file_exists($path) || !$save) {
+    if($tipe==5){
+        $image1 = imagecreatefromjpeg('template/uranium.jpg');
+    }else if($tipe==4){
+        $image1 = imagecreatefromjpeg('template/plutonium.jpg');
+    }else if($tipe==3){
+        $image1 = imagecreatefromjpeg('template/platinum.jpg');
+    }else if($tipe==2){
+        $image1 = imagecreatefromjpeg('template/neo_diamond.jpg');
+    }else{
+        $image1 = imagecreatefromjpeg('template/red_diamond.jpg');
+    }
+    $font_size_nama = 50;
+    $font_file_nama = './template/FuturaMediumBT.ttf';
+    $type_space_nama = imagettfbbox($font_size_nama, 0, $font_file_nama, $text);
+    $text_width_nama= abs($type_space_nama[4] - $type_space_nama[0]);
+    $text_height_nama = abs($type_space_nama[5] - $type_space_nama[1]);
 
-    $image1 = imagecreatefromjpeg('template.jpg');
-
-    $font_size = 50;
-    $font_file = './HelveticaNeueMed.ttf';
-    $type_space = imagettfbbox($font_size, 0, $font_file, $text);
-    $text_width = abs($type_space[4] - $type_space[0]);
-    $text_height = abs($type_space[5] - $type_space[1]);
+    $font_size_nomor = 73;
+    $font_file_nomor = './template/digital7.ttf';
+    $type_space_nomor = imagettfbbox($font_size_nomor, 0, $font_file_nomor, $text);
+    $text_width_nomor= abs($type_space_nomor[4] - $type_space_nomor[0]);
+    $text_height_nomor = abs($type_space_nomor[5] - $type_space_nomor[1]);
 
     $text_color = imagecolorallocate($image1, 255, 255, 255);
     $text_colorb = imagecolorallocate($image1, 0, 0, 0);
@@ -41,18 +80,16 @@ if (!file_exists($path)) {
     $height = ImageSY($image1);
 
 
-    $x = (($width - $text_width) / 2);
-    $y = $height - ($text_height *3);
+    $x = 50;
+    $y = 700;
     //255, 29, 800, 450, 527.5, 239.5
-    //echo "$text_width, $text_height, $width, $height, $x, $y";
-    //imagettftext($image1, $font_size, 0, $x, $y, $text_color, $font_file, $text);
-    imagettftext($image1, $font_size, 0, 77, $y+2 , $text_colorb, $font_file, $text);
-    imagettftext($image1, $font_size, 0, 75, $y , $text_color, $font_file, $text);
-    $generator = new Plansky\CreditCard\Generator();
-    $nomor = $generator->single(5409, 20);
-    $nomor = substr($nomor,0,4).' '.substr($nomor,4,4).' '.substr($nomor,8,4).' '.substr($nomor,12,4);
-    imagettftext($image1, 60, 0, 402, (($height/2)-$text_height-20)+2 , $text_colorr, $font_file,$nomor);
-    imagettftext($image1, 60, 0, 400, (($height/2)-$text_height-20) , $text_color, $font_file,$nomor);
+    //echo "$text_width, $text_height_nama, $width, $height, $x, $y";
+    //imagettftext($image1, $font_size_nama, 0, $x, $y, $text_color, $font_file_nama, $text);
+    imagettftext($image1, $font_size_nama, 0, $x+2, $y+2 , $text_colorb, $font_file_nama, $text);
+    imagettftext($image1, $font_size_nama, 0, $x, $y , $text_color, $font_file_nama, $text);
+
+    //imagettftext($image1, $font_size_nomor, 0, 402, 300 , $text_colorr, $font_file_nomor,$kartu);
+    imagettftext($image1, $font_size_nomor, 0, 400, 335, $text_color, $font_file_nomor,$kartu);
 
     imagejpeg($image1, $path, 100);
     imagedestroy($image1);
